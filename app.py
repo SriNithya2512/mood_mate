@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import random
 import datetime
-import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="MoodMate – Daily Mood Tracker", layout="centered")
 
@@ -57,20 +56,6 @@ if selected_mood:
 
         full_data.to_csv("mood_log.csv", index=False)
         st.success("✅ Your entry has been saved!")
-
-    # --- History / Chart --- #
-    if st.checkbox("📊 Show Mood Chart"):
-        try:
-            df = pd.read_csv("mood_log.csv")
-            mood_counts = df["Mood"].value_counts()
-
-            fig, ax = plt.subplots()
-            mood_counts.plot(kind="bar", ax=ax, color="skyblue")
-            ax.set_title("Mood Frequency Over Time")
-            ax.set_ylabel("Count")
-            st.pyplot(fig)
-        except:
-            st.warning("No mood data to show yet. Start journaling!")
 
 # --- Footer --- #
 st.markdown("---")
